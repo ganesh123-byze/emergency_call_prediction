@@ -1,235 +1,170 @@
-🚨 Emergency Call Center Traffic Prediction & Surge Detection using Machine Learning
+# 🚨 Emergency Call Volume Prediction & Surge Detection System
 
-Real-Time Emergency Traffic Forecasting & Anomaly Detection System
-Built with Python • FastAPI • Streamlit • Scikit-Learn
+A production-ready Machine Learning web application that predicts emergency call volume and detects surge patterns in real-time.
 
-📌 Project Overview
+🌐 **Live Demo:**  
+https://emergency-call-prediction-2.onrender.com/
 
-Emergency call centers manage high volumes of critical calls related to:
+---
 
-🚑 Medical Emergencies
+## 📌 Project Overview
 
-🔥 Fire Incidents
+This project predicts emergency call traffic and identifies potential surge situations using machine learning.
 
-👮 Police Assistance
+It is designed to simulate real-world emergency response systems where accurate forecasting helps authorities allocate resources efficiently.
 
-🌪 Disaster & Severe Weather Events
+---
 
-Unexpected surges in call traffic can overload dispatch systems, delay emergency response, and increase operational risks.
+## 🚀 Features
 
-This project builds an end-to-end Machine Learning system that:
+- 📊 Emergency Call Volume Prediction
+- 📈 Live Traffic Simulation
+- ⚠ Surge Detection Logic
+- 🌐 Deployed Cloud Application (Render)
+- 🔄 Automated CI Pipeline (GitHub Actions)
+- 📦 Model Serialization using Pickle
+- 🧪 Automated Model Validation in CI
 
-✅ Predicts short-term emergency call traffic
-✅ Detects abnormal surge patterns
-✅ Simulates real-time monitoring
-✅ Provides REST API for integration
-✅ Supports proactive staffing & routing
+---
 
-🧠 Problem Statement
+## 🏗 Project Architecture
 
-How can emergency systems:
 
-Predict upcoming call volumes?
-
-Detect abnormal spikes in real-time?
-
-Allocate workforce proactively?
-
-Prevent overload situations?
-
-This system answers those questions using predictive modeling and anomaly detection.
-
-🏗 System Architecture
-Live Simulation / User Input
-            ↓
-     Streamlit Dashboard
-            ↓
-        FastAPI Backend
-            ↓
-  ML Regression Model + Isolation Forest
-            ↓
-Traffic Forecast + Surge Detection Alert
-
-📁 Project Structure
-emergency-call-ml/
-│
-├── data/
-│   └── calls.csv
-│
-├── model/
-│   └── model.pkl
+Emergency_call_prediction/
 │
 ├── backend/
-│   └── api.py
+│ ├── api.py
 │
 ├── frontend/
-│   └── app.py
+│ ├── app.py
+│
+├── model/
+│ └── model.pkl
 │
 ├── train.py
 ├── requirements.txt
-└── README.md
+├── Dockerfile
+└── .github/workflows/ci.yml
 
-📊 Dataset Description
 
-Synthetic emergency call dataset simulating 30 days of activity with 5-minute intervals.
+---
 
-🔎 Features Used
-Feature	Description
-timestamp	Call received time
-region	Geographic zone
-call_type	Medical / Fire / Police / Other
-call_duration	Duration in seconds
-priority_level	Severity level
-agent_available	Active agents
-weather_flag	Normal / Severe
-is_holiday	Holiday indicator
-hour	Extracted time feature
-day_of_week	Extracted time feature
-is_weekend	Weekend flag
-lag_1	Previous interval calls
-rolling_call_count	Rolling 3-window count
-moving_avg_3	Moving average
-call_volume_next_interval	🎯 Target variable
-🤖 Machine Learning Models
-📈 Traffic Forecasting
+## ⚙️ Tech Stack
 
-Random Forest Regressor
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Streamlit
+- Flask / FastAPI (if applicable)
+- GitHub Actions (CI)
+- Render (Cloud Deployment)
+- Docker
 
-Predicts next interval call volume
+---
 
-🚨 Surge Detection
+## 🔄 CI/CD Pipeline
 
-Isolation Forest
+This project uses **GitHub Actions** for Continuous Integration.
 
-Detects abnormal traffic spikes
+### Pipeline performs:
 
-📊 Model Performance
+- Dependency installation
+- Model loading validation
+- Unit test execution
+- Build verification on every push to `main`
 
-Mean Absolute Error (MAE): ~3.24
+If any step fails, deployment is stopped.
 
-R² Score: ~0.80
+---
 
-This indicates strong predictive capability for short-term call volume forecasting.
+## 🧠 Machine Learning Workflow
 
-⚙️ Technologies Used
-Programming
+1. Data preprocessing
+2. Feature engineering
+3. Model training
+4. Performance evaluation
+5. Model serialization (`model.pkl`)
+6. Deployment
+7. Automated CI validation
 
-Python
+---
 
-Core Libraries
+## 🧪 Model Validation in CI
 
-Pandas
+The CI pipeline verifies that:
 
-NumPy
+- `model.pkl` exists
+- Model loads successfully
+- Dependencies install correctly
 
-Scikit-learn
+This ensures production stability.
 
-FastAPI
+---
 
-Uvicorn
+## 📦 Installation (Local Setup)
 
-Streamlit
+Clone the repository:
 
-Requests
 
-Deployment
+git clone https://github.com/ganesh123-byze/emergency_call_prediction.git
 
-Render (Cloud Web Service)
+cd emergency_call_prediction
 
-🚀 How to Run Locally
-1️⃣ Clone Repository
-git clone https://github.com/your-username/emergency-call-ml.git
-cd emergency-call-ml
 
-2️⃣ Create Virtual Environment
+Create virtual environment:
+
+
 python -m venv venv
+venv\Scripts\activate (Windows)
 
 
-Activate:
-
-Windows
-
-venv\Scripts\activate
+Install dependencies:
 
 
-Mac/Linux
-
-source venv/bin/activate
-
-3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-4️⃣ Train Model (First Time Only)
-python train.py
+
+Run application:
 
 
-This generates:
-
-model/model.pkl
-
-5️⃣ Start Backend API
-uvicorn backend.api:app --reload
+python backend/api.py
 
 
-Test:
+or (if Streamlit):
 
-http://127.0.0.1:8000
-
-6️⃣ Start Frontend Dashboard
-
-Open new terminal:
 
 streamlit run frontend/app.py
 
 
-Dashboard runs at:
+---
 
-http://localhost:8501
+## ☁ Deployment
 
-🌐 Deployment (Render)
+The application is deployed on **Render**.
 
-Backend deployed using Render Web Service.
+Deployment is automatically triggered after successful CI checks.
 
-Build Command
-pip install -r requirements.txt
+---
 
-Start Command
-uvicorn backend.api:app --host 0.0.0.0 --port $PORT
+## 🎯 Future Improvements
 
-🎯 Key Features
+- Model performance threshold validation in CI
+- Real-time monitoring & logging
+- Automatic model retraining pipeline
+- REST API documentation (Swagger)
+- Performance benchmarking
 
-✔ End-to-End ML Pipeline
-✔ Regression + Anomaly Detection
-✔ Real-Time Traffic Simulation
-✔ REST API Integration
-✔ Clean Modular Structure
-✔ Deployment Ready
-✔ Production Thinking
+---
 
-💡 Real-World Use Cases
+## 👨‍💻 Author
 
-Smart City Emergency Monitoring
+Ganesh Pedagada  
+Aspiring Cloud & Machine Learning Engineer  
 
-Disaster Response Optimization
+---
 
-Police & Medical Dispatch Planning
+## ⭐ If You Like This Project
 
-Emergency Workforce Forecasting
+Give it a star ⭐ on GitHub!
 
-Public Safety Analytics
-
-🔥 Future Improvements
-
-XGBoost / Gradient Boosting Integration
-
-LSTM Time-Series Forecasting
-
-Kafka Real-Time Streaming
-
-MLflow Experiment Tracking
-
-Docker Containerization
-
-CI/CD Pipeline
-
-Multi-Region Scaling
